@@ -8,7 +8,7 @@
   <maintainer email="amsullivan2@wpi.edu">Andrew</maintainer>
   <maintainer email="john_mclinden@my.uri.edu">John</maintainer>
 
-  <license>GPLv3</license>
+  <license>BSD</license>
 
   <!-- The *depend tags are used to specify dependencies -->
   <!-- Dependencies can be catkin packages or system dependencies -->
