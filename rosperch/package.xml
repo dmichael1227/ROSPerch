@@ -4,10 +4,11 @@
   <version>0.0.0</version>
   <description>rosperch package for integrating ROS with a UTAP SeaPerch</description>
 
-  <!-- Maintainer Tags -->
-  <maintainer email="amsullivan2@wpi.edu">Andrew</maintainer>
-  <maintainer email="john_mclinden@my.uri.edu">John</maintainer>
-
+  <!-- Important Info Tags -->
+  <author>Andrew Sullivan</author>
+  <author>John McLinden</author>
+  <maintainer email="amsullivan2@wpi.edu">Andrew Sullivan</maintainer>
+  <maintainer email="john_mclinden@my.uri.edu">John McLinden</maintainer>
   <license>BSD</license>
 
   <!-- The *depend tags are used to specify dependencies -->
