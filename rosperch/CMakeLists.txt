@@ -161,10 +161,12 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+ catkin_install_python(PROGRAMS
+   scripts/simple_motor_test/controller.py
+   scripts/simple_motor_test/receiver.py
+   scripts/simple_motor_test/motor_code.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 #UNCOMMENT THE LINES ABOVE THIS ONCE YOU ADD SCRIPTS!!!!!!!
 
