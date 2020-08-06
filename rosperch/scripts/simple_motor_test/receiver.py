@@ -12,7 +12,8 @@ FILE_PATH = '/home/ubuntu/catkin_ws/src/rosperch/scripts/simple_motor_test/motor
 
 def callback(data):
     rospy.loginfo('I heard %s', data.data) # Log what is heard
-    subprocess.call(['sudo','python3', FILE_PATH,'%s' % data.data]) # Call motor_code.py when receiving a message
+#    subprocess.call(['sudo','python3', FILE_PATH,'%s' % data.data]) # Call motor_code.py when receiving a message
+    subprocess.call(['python3', FILE_PATH,'%s' % data.data]) # Call motor_code.py when receiving a message
 
 def listener():
     # Set up the listener node
