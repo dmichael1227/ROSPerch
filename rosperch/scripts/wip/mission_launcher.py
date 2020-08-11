@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
 # https://github/ros/ros_tutorials.com
+# And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
 # Software License Agreement (BSD License)
-
 
 import rospy
 import time
