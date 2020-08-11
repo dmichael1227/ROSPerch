@@ -26,16 +26,16 @@ pwm.frequency = 1600
 
 #### CONFIGURE THE RPI TO INTERFACE WITH CONTROL BOARD ####
 
-#Make it easier to remember which pins control which motors
+# Make it easier to remember which pins control which motors
 GR1 = 19
 GR2 = 21
-BL1 = 13 
+BL1 = 13
 BL2 = 26
 OR1 = 20
 BR1 = 27
 
 
-#Do the same for the corresponding PWM signals
+# Do the same for the corresponding PWM signals
 GR1_PWM = 1
 GR2_PWM = 5
 BL1_PWM = 3
@@ -44,25 +44,25 @@ OR1_PWM = 0
 BR1_PWM = 2
 
 
-#Use the numbering scheme for the Broadcom chip, not the RPi pin numbers
+# Use the numbering scheme for the Broadcom chip, not the RPi pin numbers
 GPIO.setmode(GPIO.BCM)
 
-#Turn off warnings about pins being already configured
-GPIO.setwarnings(False) 
+# Turn off warnings about pins being already configured
+GPIO.setwarnings(False)
 
 
 #Setup pins to control direction on the motor driver chip (MAXIM's MAX14870)
-GPIO.setup(GR1,GPIO.OUT)#Green 1
-GPIO.setup(GR2,GPIO.OUT)#Green 2
-GPIO.setup(BL1,GPIO.OUT)#Blue 1
-GPIO.setup(BL2,GPIO.OUT)#Blue 2
-GPIO.setup(OR1,GPIO.OUT)#Orange 1
-GPIO.setup(BR1,GPIO.OUT)#Brown 1
+GPIO.setup(GR1,GPIO.OUT) #Green 1
+GPIO.setup(GR2,GPIO.OUT) #Green 2
+GPIO.setup(BL1,GPIO.OUT) #Blue 1
+GPIO.setup(BL2,GPIO.OUT) #Blue 2
+GPIO.setup(OR1,GPIO.OUT) #Orange 1
+GPIO.setup(BR1,GPIO.OUT) #Brown 1
 
 
-#status LEDs
-GPIO.setup(6,GPIO.OUT)#
-GPIO.setup(16,GPIO.OUT)#
+# Status LEDs
+GPIO.setup(6,GPIO.OUT)
+GPIO.setup(16,GPIO.OUT)
 
 
 # Based on code released by rdb under the Unlicense (unlicense.org)
@@ -72,11 +72,11 @@ GPIO.setup(16,GPIO.OUT)#
 # Find the joystick device(s)
 print('Available devices:')
 
-#need to check to make sure a joystick has been connected before we proceed
-#if not, we'll just wait here until someone connects a joystick
+# Need to check to make sure a joystick has been connected before we proceed
+# if not, we'll just wait here until someone connects a joystick.
 
-#this is usually called a flag and is used to check a condition
-#when the desired condition is met, we change the value of the flag
+# This is usually called a flag and is used to check a condition
+# when the desired condition is met, we change the value of the flag.
 joy_not_found = 1
 
 while joy_not_found:
@@ -161,21 +161,21 @@ for btn in buf[:num_buttons]:
 print(('%d axes found: %s' % (num_axes, ', '.join(axis_map))))
 print(('%d buttons found: %s' % (num_buttons, ', '.join(button_map))))
 
-#Declare variables for use later
-#These will be the values from the right joystick
+# Declare variables for use later
+# These will be the values from the right joystick
 intValx2 = 0
 intValy2 = 0
 
-#These will be the values from the left joystick
+# These will be the values from the left joystick
 intValx = 0
 intValy = 0
 
-#These will be the values from the two triggers in the front of the joystick
+# These will be the values from the two triggers in the front of the joystick
 intValrx = 0
 intValry = 0
 
-#A TRY-CATCH in programming allows a program to fail gracefully if the "try" portion
-#cannot be executed
+# A TRY-CATCH in programming allows a program to fail gracefully if the "try" portion
+# cannot be executed.
 try:
 
     # Main event loop
@@ -189,7 +189,7 @@ try:
         if evbuf:
             tyme, value, type, number = struct.unpack('IhBB', evbuf)
 
-            #Use for debugging
+            # Use for debugging
             #if type & 0x80:
                 #print("(initial)",end=""),
 
@@ -197,7 +197,7 @@ try:
                 button = button_map[number]
                 if button:
                     button_states[button] = value
-                    #Use "PRINT" for debugging - comment out to speed program execution
+                    # Use "PRINT" for debugging - comment out to speed program execution
                     if value:
                         print("%s pressed" % (button))
                     else:
@@ -221,86 +221,82 @@ try:
             if type & 0x02:
                 axis = axis_map[number]
                 #right joystick fwd/rev
-                if axis=="y2":          
+                if axis=="y2":
                     fvalue = value
                     axis_states[axis] = fvalue
                     intValy2 = int(fvalue)*2+1
-                    #Use "PRINT" for debugging, comment out to speed program
+                    # Use "PRINT" for debugging, comment out to speed program
                     print("%d" % (intValy2))
-                #right joystick left/right
+                # Right joystick left/right
                 if axis=="x2":
                     fvalue = value
                     axis_states[axis] = fvalue
                     intValx2 = int(fvalue)*2+1
-                        #left joystick fwd/rev      
+                # Left joystick fwd/rev
                 if axis=="y":
                     fvalue = value
                     axis_states[axis] = fvalue
                     intValy = int(fvalue)*2+1
-                #left joystick left/right
+                # Left joystick left/right
                 if axis=="x":
                     fvalue = value
                     axis_states[axis] = fvalue
                     intValx = int(fvalue)*2+1
-                        #front right trigger fwd (vehicle ascend)
+                # Front right trigger fwd (vehicle ascend)
                 if axis=="ry":
                     fvalue = value
                     axis_states[axis] = fvalue
                     intValry = int(fvalue)*2+1
-                #front left trigger rev (vehicle descend)
+                # Front left trigger rev (vehicle descend)
                 if axis=="rx":
                     fvalue = value
                     axis_states[axis] = fvalue
                     intValrx = int(fvalue)*2+1
-                                       
-                #There's a nice tutorial for single joysick control at http://home.kendra.com/mauser/Joystick.html      
+
+                # There's a nice tutorial for single joysick control at http://home.kendra.com/mauser/Joystick.html
                 if intValy2<-100:
 
-                    GPIO.output(GR1,GPIO.LOW)#direction pin
+                    GPIO.output(GR1,GPIO.LOW) # Direction pin
                     pwm.channels[GR1_PWM].duty_cycle = abs(intValy2)
-                    
+
                 elif intValy2>100:
 
-                    GPIO.output(GR1,GPIO.HIGH)#direction pin                
+                    GPIO.output(GR1,GPIO.HIGH) # Direction pin
                     pwm.channels[GR1_PWM].duty_cycle = (intValy2)
-                    
+
                 else:
-                    
-                    pwm.channels[GR1_PWM].duty_cycle = 0 
+                    pwm.channels[GR1_PWM].duty_cycle = 0
 
                 if intValy>100:
-                
                     GPIO.output(BL1,GPIO.HIGH)#direction pin
                     pwm.channels[BL1_PWM].duty_cycle = (intValy)
-                    
+
                 elif intValy<-100:
-                
                     GPIO.output(BL1,GPIO.LOW)#direction pin
                     pwm.channels[BL1_PWM].duty_cycle = abs(intValy)
-                    
-                else:
 
-                    pwm.channels[BL1_PWM].duty_cycle = 0 
+                else:
+                    pwm.channels[BL1_PWM].duty_cycle = 0
 
                 if intValrx>100:
-                
                     GPIO.output(OR1,GPIO.LOW)#direction pin
                     GPIO.output(BR1,GPIO.LOW)#direction pin
-
-                    pwm.channels[OR1_PWM].duty_cycle = abs(intValrx)               
+                    pwm.channels[OR1_PWM].duty_cycle = abs(intValrx)
                     pwm.channels[BR1_PWM].duty_cycle = abs(intValrx)
 
                 elif intValry>100:
-                
                     GPIO.output(OR1,GPIO.HIGH)#direction pin
                     GPIO.output(BR1,GPIO.HIGH)#direction pin
-       
                     pwm.channels[OR1_PWM].duty_cycle = abs(intValry)
                     pwm.channels[BR1_PWM].duty_cycle = abs(intValry)
-                else:
 
+                else:
                     pwm.channels[OR1_PWM].duty_cycle = 0
                     pwm.channels[BR1_PWM].duty_cycle = 0
-                       
-except (KeyboardInterrupt,SystemExit):            
+
+except (KeyboardInterrupt,SystemExit):
+    pwm.channels[OR1_PWM].duty_cycle = 0
+    pwm.channels[BR1_PWM].duty_cycle = 0
+    pwm.channels[BL1_PWM].duty_cycle = 0
+    pwm.channels[GR1_PWM].duty_cycle = 0
     GPIO.cleanup()
