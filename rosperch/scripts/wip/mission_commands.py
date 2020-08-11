@@ -4,47 +4,48 @@
 # And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
 # Software License Agreement (BSD License)
 
-import threading
 import rospy
 import time
 from std_msgs.msg import Bool
-from rosperch.msg import Commands
 
-
-systemready = True
 def talker():
-    global systemready
-    pub = rospy.Publisher('motorcommands', Commands, queue_size=10) # Publish to mototrcommands topic
-    rospy.init_node('talker', anonymous=True) # Initiate talker node
-    rate = rospy.Rate(10) # 10hz
+    pub = rospy.Publisher('motorstuff', Bool, queue_size=10) # Publish to motorstuff topic
+    rospy.init_node('talker', anonymous=True) # Initiate the  talker node
+    rate = rospy.Rate(10) # Setting the rate to 10hz
     while not rospy.is_shutdown():
-        rospy.Subscriber('motorcommands', Commands, callback=None) # Subscribe to motorcommands topic
-        command_input = input("Mission Command (drive, rightturn,leftturn,stop): ") # Query for command and convert to float
-        mission_parameter = float(input("Mission Parameter (dist,degrees): "))
-        rospy.loginfo([launch_command," %s" % mission_parameter]) # Log the entered commands
-        if systemready:
-            pub.publish(launch_command) # Publish command to launch_command topic
+
+        # Prompts the user for an input of either Y or N and assigns that to a variable
+        print("Launch mission?")
+        command_input = input("Y/N: ") # Query for command
+        command_input = command_input.upper()
+
+         # If the user inputs Y, launch mission
+        if command_input == 'Y':
+            launch_command = bool(1) # Convert to boolean
+            print("Launch_command is : %s" % launch_command)
+            rospy.loginfo(launch_command) # Log the entered command
+            pub.publish(launch_command) # Publish command to ledstuff topic
+            rate.sleep() # Sleep (10ms)
+            print()
+
+        # If the user inputs N, don't launch mission
+        elif command_input == 'N':
+            launch_command = bool(0) # Convert to boolean
+            print("Launch_command is : %s" % launch_command)
+            rospy.loginfo(launch_command) # Log the entered command
+            pub.publish(launch_command) # Publish command to ledstuff topic
+            rate.sleep() # Sleep (10ms)
+            print()
+
+        # If the user inputs N, don't launch mission
         else:
-            print("System Not Ready!")
-        rate.sleep() # Sleep (10ms)
+            print(command_input, " is an invalid input")
+            print("Please try again!")
+            print()
 
-def callback(data):
-    global systemready
-    systemready = data.data
-    print("System State %s " % systemready)
-
-def listener():
-    global systemready
-    # Set up the listener node
-    rospy.init_node('listener', anonymous=True) 
-    rospy.Subscriber('systemstate', Commands, callback) # Subscribe to system state topic
-
-    # Keep Python from exiting until this node is stopped
-    rospy.spin()
 
 if __name__ == '__main__':
     try:
-        t = threading.Thread(target=listener,args=None,daemon=True).start
         talker()
     except rospy.ROSInterruptException:
         pass
