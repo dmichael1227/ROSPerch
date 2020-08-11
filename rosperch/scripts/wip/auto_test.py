@@ -56,11 +56,11 @@ GPIO.setup(16,GPIO.OUT)
 running_mission = False
 
 def drive(GRdir,BLdir,t):
-    start_time = time.time
-    curr_time = time.time
+    start_time = time.time()
+    curr_time = time.time()
     print(t)
     while ((curr_time - start_time) < t):
-        curr_time = time.time
+        curr_time = time.time()
         if GRdir == True:
             GPIO.output(GR1,GPIO.HIGH)
         else:
@@ -79,14 +79,16 @@ def stop_motors():
 def callback(data):
     global running_mission
     rospy.loginfo('I heard %s', data.data) # Log what is heard
-    if data.data == True & running_mission == False:
+    print(data.data)
+    print(running_mission)
+    if data.data == True and running_mission == False:
         running_mission = True
         drive(True,True,3.77)
         drive(True,False,0.5)
         drive(True,True,1.0)
         stop_motors()
         running_mission = False
-    elif data.data == True & running_mission == True:
+    elif data.data == True and running_mission == True:
         print("Warning: Mission already running")
     else:
         print("Attempting to stop mission...")
