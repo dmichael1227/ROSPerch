@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
 # https://github/ros/ros_tutorials.com
-# Software License Agreement (GPLv3 License)
+# Software License Agreement (BSD License)
 
 import threading
 import rospy

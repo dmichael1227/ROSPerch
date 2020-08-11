@@ -36,12 +36,12 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 # Setup pins to control direction on the motor driver chip (MAXIM's MAX14870)
-GPIO.setup(GR1,GPIO.OUT) #Green 1
-GPIO.setup(GR2,GPIO.OUT) #Green 2
-GPIO.setup(BL1,GPIO.OUT) #Blue 1
-GPIO.setup(BL2,GPIO.OUT) #Blue 2
-GPIO.setup(OR1,GPIO.OUT) #Orange 1
-GPIO.setup(BR1,GPIO.OUT) #Brown 1
+GPIO.setup(GR1,GPIO.OUT) # Green 1
+GPIO.setup(GR2,GPIO.OUT) # Green 2
+GPIO.setup(BL1,GPIO.OUT) # Blue 1
+GPIO.setup(BL2,GPIO.OUT) # Blue 2
+GPIO.setup(OR1,GPIO.OUT) # Orange 1
+GPIO.setup(BR1,GPIO.OUT) # Brown 1
 
 
 # Status LEDs
@@ -52,6 +52,7 @@ running_mission = False
 def drive(GRdir,BLdir,t):
     start_time = time.time
     curr_time = time.time
+    print(t)
     while ((curr_time - start_time) < t):
         curr_time = time.time
         if GRdir == True:
