@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
-# https://github.com/ros/ros_tutorials
-# Also based on the UTAP 2020 code available at:
-# https://github.com/jdicecco/UTAP
+# https://github/ros/ros_tutorials.com
+# And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
 # Software License Agreement (BSD License)
 
 import RPi.GPIO as GPIO
