@@ -168,7 +168,7 @@ include_directories(
    scripts/simple_motor_test/receiver.py
    scripts/simple_motor_test/motor_code.py
    scripts/9dof_pub.py
-   scripts/simple_controller.py
+   scripts/joy_controller.py
    scripts/auto_test.py
    scripts/mission_launcher.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
