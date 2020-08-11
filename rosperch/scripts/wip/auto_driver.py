@@ -1,15 +1,6 @@
-#!/usr/bin/env python3
-# Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
-# https://github/ros/ros_tutorials.com
-# And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
-# Software License Agreement (BSD License)
-
-
 import rospy
 import time
 import RPi.GPIO as GPIO
-import sys
-import getopt
 import adafruit_pca9685
 import board
 from rosperch.msg import Commands
@@ -46,80 +37,76 @@ def stop_motors():
 GPIO.setwarnings(False)
 
 # Setup pins to control direction on the motor driver chip (MAXIM's MAX14870)
-GPIO.setup(GR1,GPIO.OUT) # Green 1
-GPIO.setup(GR2,GPIO.OUT) # Green 2
-GPIO.setup(BL1,GPIO.OUT) # Blue 1
-GPIO.setup(BL2,GPIO.OUT) # Blue 2
-GPIO.setup(OR1,GPIO.OUT) # Orange 1
-GPIO.setup(BR1,GPIO.OUT) # Brown 1
+GPIO.setup(GR1,GPIO.OUT) #Green 1
+GPIO.setup(GR2,GPIO.OUT) #Green 2
+GPIO.setup(BL1,GPIO.OUT) #Blue 1
+GPIO.setup(BL2,GPIO.OUT) #Blue 2
+GPIO.setup(OR1,GPIO.OUT) #Orange 1
+GPIO.setup(BR1,GPIO.OUT) #Brown 1
 
 
-# Status LEDs
+#status LEDs
 GPIO.setup(6,GPIO.OUT)
 GPIO.setup(16,GPIO.OUT)
 running_mission = False
 
-perch_speed_straight = 0.4 # Define perch forward speed (m/s)
-perch_speed_rightturn = 180 # Define perch right turn speed (degrees/s)
-perch_speed_leftturn = 180 # Define perch left turn speed (degrees/s)
-systemready=True
+perch_speed_straight = 0.4 #define perch forward speed (m/s)
+perch_speed_rightturn = 180 #define perch right turn speed (degrees/s)
+perch_speed_leftturn = 180 #define perch left turn speed (degrees/s)
 pub = rospy.Publisher('systemstate', Bool, queue_size=10)
 
-# Function for driving forwards
+#function for driving forwards
 def drive(dist):
     global pub
-    start_time = time.time # Initialize start time
-    curr_time = time.time # Initialize current time
+    start_time = time.time() #initialize start time
+    curr_time = time.time() #initialize current time
     t = dist/perch_speed_straight
-    while curr_time - start_time < t
-        curr_time = time.time
-        GPIO.output(GR1,GPIO.HIGH) # Go forward
-        GPIO.output(BL1,GPIO.HIGH) # Go forward
-        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed. Adjust these for drift
-        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed. Adjust these for drift
+    while (curr_time - start_time) < t
+        curr_time = time.time()
+        GPIO.output(GR1,GPIO.HIGH) #go forward        
+        GPIO.output(BL1,GPIO.HIGH) #go forward
+        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF #full speed. Adjust these for drift
+        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF #full speed. Adjust these for drift
         systemready = False
         pub.publish(systemready)
     systemready = True
     pub.publish(systemready)
 
-# Function for turning right
+#function for turning right        
 def rightturn(angle):
     global pub
-    start_time = time.time # Initialize start time
-    curr_time = timdef stop_motors():
-    pwm.channels[GR1_PWM].duty_cycle = 0x0000
-    pwm.channels[BL1_PWM].duty_cycle = 0x0000e.time # Initialize current time
-    t = angle/perch_speed_rightturn # How long to stay in this state
-    while curr_time - start_time < t
-        curr_time = time.time
-        GPIO.output(GR1,GPIO.LOW) # Reverse
-        GPIO.output(BL1,GPIO.HIGH) # Go forward
-        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed
-        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed
+    start_time = time.time() #initialize start time
+    curr_time = time.time() #initialize current time
+    t = angle/perch_speed_rightturn #how long to stay in this state
+    while (curr_time - start_time) < t
+        curr_time = time.time()
+        GPIO.output(GR1,GPIO.LOW) #reverse        
+        GPIO.output(BL1,GPIO.HIGH) #go forward 
+        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF #full speed.
+        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF #full speed. 
         systemready = False
         pub.publish(systemready)
     systemready = True
     pub.publish(systemready)
-
-# Function for turning left
+    
+#function for turning left        
 def leftturn(angle):
-    global systemready
     global pub
-    start_time = time.time # Initialize start time
-    curr_time = time.time # Initialize current time
-    t = angle/perch_speed_rightturn # How long to stay in this state
-    while curr_time - start_time < t
-        curr_time = time.time
-        GPIO.output(GR1,GPIO.HIGH) # Go forward
-        GPIO.output(BL1,GPIO.LOW) # Reverse
-        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed
-        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed
+    start_time = time.time() #initialize start time
+    curr_time = time.time() #initialize current time
+    t = angle/perch_speed_rightturn #how long to stay in this state
+    while (curr_time - start_time) < t
+        curr_time = time.time()
+        GPIO.output(GR1,GPIO.HIGH) #go forward        
+        GPIO.output(BL1,GPIO.LOW) #reverse
+        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF #full speed.
+        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF #full speed.
         systemready = False
         pub.publish(systemready)
     systemready = True
     pub.publish(systemready)
-
-# Function for stopping
+    
+#function for stopping
 def stop_motors():
     pwm.channels[GR1_PWM].duty_cycle = 0x0000
     pwm.channels[BL1_PWM].duty_cycle = 0x0000
@@ -130,7 +117,7 @@ def callback(data):
         drive(data.command_value)
         print("Driving %s Meters" % data.command_value)
     elif data.command_type == "rightturn":
-        rightturn(data.comand_value)
+        rightturn(data.command_value)
         print("Turning Right %s Degrees" % data.command_value)
     elif data.command_type == "leftturn":
         leftturn(data.command_value)
@@ -141,12 +128,12 @@ def callback(data):
     else:
         print("Command Not Recognized")
 
+    
 def listener():
-    global systemready
     # Set up the listener node
-    rospy.init_node('listener', anonymous=True)
-    rospy.Subscriber('motorcommands', Commands, callback) # Subscribe to motorcommands topic
-
+    rospy.init_node('listener', anonymous=True) 
+    rospy.Subscriber('motorcommands', Commands, callback) # subscribe to motorcommands topic
+    
     # Keep Python from exiting until this node is stopped
     rospy.spin()
 

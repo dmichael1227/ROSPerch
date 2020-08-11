@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-# Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
-# https://github/ros/ros_tutorials.com
-# And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
-# Software License Agreement (BSD License)
-
 import rospy
 import time
 import RPi.GPIO as GPIO
@@ -42,12 +36,12 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 # Setup pins to control direction on the motor driver chip (MAXIM's MAX14870)
-GPIO.setup(GR1,GPIO.OUT) # Green 1
-GPIO.setup(GR2,GPIO.OUT) # Green 2
-GPIO.setup(BL1,GPIO.OUT) # Blue 1
-GPIO.setup(BL2,GPIO.OUT) # Blue 2
-GPIO.setup(OR1,GPIO.OUT) # Orange 1
-GPIO.setup(BR1,GPIO.OUT) # Brown 1
+GPIO.setup(GR1,GPIO.OUT) #Green 1
+GPIO.setup(GR2,GPIO.OUT) #Green 2
+GPIO.setup(BL1,GPIO.OUT) #Blue 1
+GPIO.setup(BL2,GPIO.OUT) #Blue 2
+GPIO.setup(OR1,GPIO.OUT) #Orange 1
+GPIO.setup(BR1,GPIO.OUT) #Brown 1
 
 
 # Status LEDs
@@ -58,17 +52,16 @@ running_mission = False
 def drive(GRdir,BLdir,t):
     start_time = time.time()
     curr_time = time.time()
-    print(t)
     while ((curr_time - start_time) < t):
-        curr_time = time.time()
+        curr_time = time.time
         if GRdir == True:
-            GPIO.output(GR1,GPIO.LOW)
-        else:
             GPIO.output(GR1,GPIO.HIGH)
-        if BLdir == True:
-            GPIO.output(BL1,GPIO.LOW)
         else:
+            GPIO.output(GR1,GPIO.LOW)
+        if BLdir == True:
             GPIO.output(BL1,GPIO.HIGH)
+        else:
+            GPIO.output(BL1,GPIO.LOW)
         pwm.channels[GR1_PWM].duty_cycle = 0xFFFF
         pwm.channels[BL1_PWM].duty_cycle = 0xFFFF
 
@@ -79,18 +72,11 @@ def stop_motors():
 def callback(data):
     global running_mission
     rospy.loginfo('I heard %s', data.data) # Log what is heard
-    print(data.data)
-    print(running_mission)
     if data.data == True and running_mission == False:
         running_mission = True
-        drive(True,True,3.5)
-        drive(True,False,0.8)
-        drive(True,True,3.5)
-        drive(True,False,1.3)
-        drive(True,True,3.2)
-        drive(True,False,1.3)
-        drive(True,True,3.5)
-        drive(True,False,1.3)
+        drive(True,True,3.77)
+        drive(True,False,0.5)
+        drive(True,True,1.0)
         stop_motors()
         running_mission = False
     elif data.data == True and running_mission == True:
