@@ -1,14 +1,19 @@
+#!/usr/bin/env python3
+# Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
+# https://github/ros/ros_tutorials.com
+# And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
+# Software License Agreement (BSD License)
 import time
 import math
 import board
 import busio
-#PWM Board
+# PWM Board
 import adafruit_pca9685
-#Error handling
+# Error handling
 import subprocess
 
-#For access to operating system and array types
-#Joystick support
+# For access to operating system and array types
+# Joystick support
 import os, sys, struct, array
 
 #Input output control
