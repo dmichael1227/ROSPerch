@@ -54,6 +54,7 @@ find_package(catkin REQUIRED COMPONENTS
    Magno.msg
    Accel.msg
    Orientation.msg
+   Commands.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -168,6 +169,8 @@ include_directories(
    scripts/simple_motor_test/motor_code.py
    scripts/9dof_pub.py
    scripts/simple_controller.py
+   scripts/auto_test.py
+   scripts/mission_launcher.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

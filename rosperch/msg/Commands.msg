@@ -1,0 +1,2 @@
+string command_type
+float64 command_value
