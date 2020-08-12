@@ -4,8 +4,8 @@
 # to a seperate program that deals with making the motors
 # on the ROSPerch move.
 # Adapted Sources:
-# Motor command code in auto_driver.py is adapted 
-# from the UTAP 2020 code at 
+# Motor command code in auto_driver.py is adapted
+# from the UTAP 2020 code at
 # https://github.com/jdicecco/UTAP/
 # License:
 # Software License Agreement (GPLv3 License)
@@ -31,13 +31,15 @@ def callback(data):
         pub = rospy.Publisher('motorcommands', Commands, queue_size=10) # Publish to motorcommands topic
         rate = rospy.Rate(10) # Sets the ROS rate to 10hz
         while not rospy.is_shutdown(): # Runs the code only while the roscore is running
+            print()
             print("Mission Commands:")
-            print("Drive, Right Turn, Left Turn, Stop")   
+            print("Drive, RightTurn, LeftTurn, Stop")
             command_input = input("Please Input a Command: ") # Ask user for mission command
+            command_input = str(command_input.upper())
             print()
 
             # What to do if the user sends the Drive Command
-            if command_input.upper() == 'DRIVE':
+            if command_input == "DRIVE":
                 command_input = 'DRIVE' # Accounts for differences in input and what the listener is looking for
                 mission_parameter = float(input("Distance in Meters: ")) # Asks user for Distance
                 rospy.loginfo([command_input," %s" % mission_parameter]) # Log the entered commands
@@ -45,32 +47,32 @@ def callback(data):
                 rate.sleep() # Sleep for 10ms
 
             # What to do if the user sends the Turn Right Command (accounts for space or no space)
-            elif command_input.upper() == 'RIGHTTURN' or 'RIGHT TURN':
+            elif command_input == "RIGHTTURN":
                 command_input = 'RIGHTTURN' # Accounts for differences in input and what the listener is looking for
                 mission_parameter = float(input("Degrees to Turn: ")) # Asks user for Turn parameters
                 rospy.loginfo([command_input," %s" % mission_parameter]) # Log the entered commands
                 pub.publish(command_input,mission_parameter)
-                rate.sleep() # Sleep for 10ms            
+                rate.sleep() # Sleep for 10ms
 
             # What to do if the user sends the Turn Left Command (accounts for space or no space)
             # For line by line comments describing functionality, see the DRIVE and RIGHTTURN
             # if/elif statements.
-            elif command_input.upper() == 'LEFTTURN' or 'LEFT TURN':
+            elif command_input == "LEFTTURN":
                 command_input = 'LEFTTURN'
                 mission_parameter = float(input("Degrees to Turn: "))
-                rospy.loginfo([command_input," %s" % mission_parameter]) 
+                rospy.loginfo([command_input," %s" % mission_parameter])
                 pub.publish(command_input,mission_parameter)
-                rate.sleep() # Sleep for 10ms       
-                
+                rate.sleep() # Sleep for 10ms
+
             # What to do if the user sends the Stop Command
             # For line by line comments describing functionality, see the DRIVE and RIGHTTURN
             # if/elif statements.
-            elif command_input.upper() == 'STOP':
+            elif command_input == "STOP":
                 command_input = 'STOP'
                 mission_parameter = float(1)
-                rospy.loginfo([command_input," %s" % mission_parameter]) 
+                rospy.loginfo([command_input," %s" % mission_parameter])
                 pub.publish(command_input,mission_parameter)
-                rate.sleep() # Sleep for 10ms   
+                rate.sleep() # Sleep for 10ms
 
             # What to do if the user sends an Invalid Command
             else:
