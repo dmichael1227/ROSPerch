@@ -79,21 +79,6 @@ def callback(data):
     print("System State %s " % systemready)
 
 
-
-
-
-
-    # global systemready
-    # systemready = data.data
-    # print("System State %s " % systemready)
-    # if systemready == True:
-        # # pub = rospy.Publisher('motorcommands',Commands,queue_size=10)
-        # # command_input = input("Mission Command (drive, rightturn, leftturn, stop): ")
-        # # mission_parameter = float(input("Mission Parameter (dist, degrees): "))
-        # # rospy.loginfo([command_input," %s" % mission_parameter])
-        # # pub.publish(command_input,mission_parameter)
-    # print("System State %s " % systemready)
-
 # Listener node function 
 def listener():
     # Set up the listener node

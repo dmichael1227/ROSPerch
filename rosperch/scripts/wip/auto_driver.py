@@ -167,7 +167,7 @@ def callback(data):
 
 # Listener node function
 def listener():
-    # Set up the listener node
+    # Set up the listener nod
     #rospy.init_node('listener', anonymous=True) 
     rospy.Subscriber('motorcommands', Commands, callback) # Subscribe to motorcommands topic
     
