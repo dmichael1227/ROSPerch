@@ -35,6 +35,7 @@ def talker():
 
         # What to do if the user sends the Drive Command
         if command_input.upper() == 'DRIVE':
+            command_input = 'DRIVE' # Accounts for differences in input and what the listener is looking for
             mission_parameter = float(input("Distance in Meters: ")) # Asks user for Distance
             rospy.loginfo([command_input," %s" % mission_parameter]) # Log the entered commands
             # If the system is ready, then print the command!
