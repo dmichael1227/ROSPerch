@@ -1,4 +1,4 @@
 <launch>
-        <node pkg="rosperch" type="auto_driver.py" name="auto_driver"/>
-        <node pkg="rosperch" type="mission_commands.py" name="mission_commands"/>
+        <node pkg="rosperch" type="auto_driver.py" name="auto_driver" output="screen" launch-prefix="xterm -e"/>
+        <node pkg="rosperch" type="mission_commands.py" name="mission_commands" output="screen" launch-prefix="xterm -e"/>
 </launch>
