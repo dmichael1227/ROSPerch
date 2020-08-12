@@ -171,6 +171,7 @@ include_directories(
    scripts/joy_controller.py
    scripts/wip/auto_test.py
    scripts/auto_code/auto_square.py
+   scripts/auto_code/launcher_for_auto_square.py
    scripts/wip/mission_launcher.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )

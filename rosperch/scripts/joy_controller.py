@@ -1,32 +1,32 @@
 #!/usr/bin/env python3
-# Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
-# https://github/ros/ros_tutorials.com
-# And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
-# Software License Agreement (BSD License)
+# Decription:
+# This program takes user input commands from the 
+# external controller, and moves the ROSPerch as such.
+# Adapted Sources:
+# Motor command code is adapted from the UTAP 2020
+# code at https://github.com/jdicecco/UTAP/
+# Joystick control code is based on code released 
+# by rdb under the Unlicense (unlicense.org)
+# Based on information from:
+# https://www.kernel.org/doc/Documentation/input/joystick-api.txt
+# License:
+# Software License Agreement (GPLv3 License)
+# Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
+
+# Imports the necessary libraries
 import time
 import math
 import board
 import busio
-# PWM Board
 import adafruit_pca9685
-# Error handling
 import subprocess
-
-# For access to operating system and array types
-# Joystick support
 import os, sys, struct, array
-
-#Input output control
-#Joystick support
 from fcntl import ioctl
-
-#RPi general purpose input/output pins
 import RPi.GPIO as GPIO
 
-#I2C address for the PWM driver board retrieved automatically
+# I2C address for the PWM driver board retrieved automatically
 i2c_pwm = board.I2C()
 pwm = adafruit_pca9685.PCA9685(i2c_pwm)
-
 pwm.frequency = 1600
 
 #### CONFIGURE THE RPI TO INTERFACE WITH CONTROL BOARD ####
@@ -56,7 +56,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 
-#Setup pins to control direction on the motor driver chip (MAXIM's MAX14870)
+# Setup pins to control direction on the motor driver chip (MAXIM's MAX14870)
 GPIO.setup(GR1,GPIO.OUT) # Green 1
 GPIO.setup(GR2,GPIO.OUT) # Green 2
 GPIO.setup(BL1,GPIO.OUT) # Blue 1
