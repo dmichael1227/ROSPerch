@@ -304,4 +304,6 @@ except (KeyboardInterrupt,SystemExit):
     pwm.channels[BR1_PWM].duty_cycle = 0
     pwm.channels[BL1_PWM].duty_cycle = 0
     pwm.channels[GR1_PWM].duty_cycle = 0
+    GPIO.output(6,GPIO.LOW)
+    GPIO.output(16,GPIO.LOW)
     GPIO.cleanup()

@@ -81,6 +81,7 @@ def callback(data):
     rospy.loginfo('I heard %s', data.data) # Log what is heard
     print(data.data)
     print(running_mission)
+    # If told to run mission, run mission, otherwise, don't
     if data.data == True and running_mission == False:
         running_mission = True
         drive(True,True,3.5)
