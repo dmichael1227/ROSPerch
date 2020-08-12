@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
+# https://github/ros/ros_tutorials.com
+# Software License Agreement (GPLv3 License)
+
 import rospy
 import time
 import RPi.GPIO as GPIO

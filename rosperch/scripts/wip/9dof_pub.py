@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# Software License Agreement (GPLv3 License)
+
 import time
 import math
 import board
