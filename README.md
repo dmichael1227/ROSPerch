@@ -103,6 +103,9 @@ This is how ROS was integrated with the UTAP 2020 daughterboard and a Raspberry 
 ## 9dof_pub.py
 The <em>9dof_pub.py</em> script reads from the FXOS8700 3-axis accelerometer/magnetometer and the FXAS21002c gyroscope, converts readings into heading, roll, yaw, and yaw tilt, and publishes heading, roll, yaw, yaw tilt, and acceleration in x, y, and z to a single topic. This code is based largely on the UTAP base code: https://github.com/jdicecco/UTAP as well as the ROS tutorials: http://wiki.ros.org/ROS/Tutorials. 
 
+## *auto_test.py* and *mission_launcher.py*
+The <code>auto_test.py</code> script and <code>mission_launcher.py</code> scripts are intended to be run together in ROS (after launching <code>roscore</code>). The <code>mission_launcher.py</code> script is fairly simple; it queries the user for a <code>Y</code> or <code>N</code> value in order to launch the <code>auto_test.py</code> script. A value of <code>Y</code> will begin the sequence of function calls in the <code>auto_test.py</code> script, while a value of <code>N</code> shuts off the forward propulsion motors. The <code>auto_test.py</code> script contains a function that takes in a set direction for each of the two forward propulsion motors (True = forwards, False = backwards) and a time duration for which the motors should be running. Currently, upon receiving the start signal from the <code>mission_launcher.py</code> script, the <code>auto_test.py</code> script begins a deterministic sequence of function calls to attempt to have the ROSPerch follow a predetermined path with no feedback.
+
 
 ## SSH into Pi Over Direct Ethernet Connection
 In order to establish an ssh connection with the Pi in situations where you may be without a wireless network, a connection between the ethernet port of a laptop and the Pi can be used. (Please note that this assumes that you have SSH enabled on your Pi.)
