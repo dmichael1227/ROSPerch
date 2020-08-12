@@ -1,8 +1,4 @@
-#!/usr/bin/env python3
-# Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
-# https://github/ros/ros_tutorials.com
-# Software License Agreement (GPLv3 License)
-
+#!/bin/env python3
 import rospy
 import time
 import RPi.GPIO as GPIO
@@ -66,7 +62,7 @@ def drive(dist):
     start_time = time.time() #initialize start time
     curr_time = time.time() #initialize current time
     t = dist/perch_speed_straight
-    while (curr_time - start_time) < t
+    while (curr_time - start_time) < t:
         curr_time = time.time()
         GPIO.output(GR1,GPIO.HIGH) #go forward        
         GPIO.output(BL1,GPIO.HIGH) #go forward
@@ -76,14 +72,15 @@ def drive(dist):
         pub.publish(systemready)
     systemready = True
     pub.publish(systemready)
-
+    pwm.channels[GR1_PWM].duty_cycle = 0x0000 #stop
+    pwm.channels[BL1_PWM].duty_cycle = 0x0000 #stop
 #function for turning right        
 def rightturn(angle):
     global pub
     start_time = time.time() #initialize start time
     curr_time = time.time() #initialize current time
     t = angle/perch_speed_rightturn #how long to stay in this state
-    while (curr_time - start_time) < t
+    while (curr_time - start_time) < t:
         curr_time = time.time()
         GPIO.output(GR1,GPIO.LOW) #reverse        
         GPIO.output(BL1,GPIO.HIGH) #go forward 
@@ -93,14 +90,15 @@ def rightturn(angle):
         pub.publish(systemready)
     systemready = True
     pub.publish(systemready)
-    
+    pwm.channels[GR1_PWM].duty_cycle = 0x0000 #stop
+    pwm.channels[BL1_PWM].duty_cycle = 0x0000 #stop
 #function for turning left        
 def leftturn(angle):
     global pub
     start_time = time.time() #initialize start time
     curr_time = time.time() #initialize current time
     t = angle/perch_speed_rightturn #how long to stay in this state
-    while (curr_time - start_time) < t
+    while (curr_time - start_time) < t:
         curr_time = time.time()
         GPIO.output(GR1,GPIO.HIGH) #go forward        
         GPIO.output(BL1,GPIO.LOW) #reverse
@@ -110,6 +108,8 @@ def leftturn(angle):
         pub.publish(systemready)
     systemready = True
     pub.publish(systemready)
+    pwm.channels[GR1_PWM].duty_cycle = 0x0000 #stop
+    pwm.channels[BL1_PWM].duty_cycle = 0x0000 #stop
     
 #function for stopping
 def stop_motors():
@@ -117,7 +117,7 @@ def stop_motors():
     pwm.channels[BL1_PWM].duty_cycle = 0x0000
 
 def callback(data):
-    rospy.loginfo('I heard %s', data.data) # Log what is heard
+    rospy.loginfo('I heard %s %s', data.command_type,data.command_value) # Log what is heard
     if data.command_type == "drive":
         drive(data.command_value)
         print("Driving %s Meters" % data.command_value)

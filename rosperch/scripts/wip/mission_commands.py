@@ -15,12 +15,11 @@ def talker():
     pub = rospy.Publisher('motorcommands', Commands, queue_size=10) #publish to ledstuff topic
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        rospy.Subscriber('motorcommands', Commands, callback=None) # subscribe to motorcommands topic
         command_input = input("Mission Command (drive, rightturn,leftturn,stop): ") #query for command and convert to float
         mission_parameter = float(input("Mission Parameter (dist,degrees): "))
-        rospy.loginfo([launch_command," %s" % mission_parameter]) #log the entered commands
+        rospy.loginfo([command_input," %s" % mission_parameter]) #log the entered commands
         if systemready:
-            pub.publish(launch_command) #publish command to ledstuff topic
+            pub.publish(command_input,mission_parameter) #publish command to ledstuff topic
         else:
             print("System Not Ready!")
         rate.sleep() #sleep (10ms)
@@ -40,7 +39,7 @@ def listener():
 if __name__ == '__main__':
     try:
         rospy.init_node('commander', anonymous=True) #initiate talker node
-        t = threading.Thread(target=listener,args=queue,daemon=True).start
+        t = threading.Thread(target=listener,args=None,daemon=True).start
         talker()
     except rospy.ROSInterruptException:
         pass
