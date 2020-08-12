@@ -170,7 +170,7 @@ include_directories(
    scripts/wip/9dof_pub.py
    scripts/joy_controller.py
    scripts/wip/auto_test.py
-   scripts/auto_square.py
+   scripts/auto_code/auto_square.py
    scripts/wip/mission_launcher.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
