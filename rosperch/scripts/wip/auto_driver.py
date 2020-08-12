@@ -129,13 +129,21 @@ def leftturn(angle):
         pub.publish(systemready)
     systemready = True
     pub.publish(systemready)
-    pwm.channels[GR1_PWM].duty_cycle = 0x0000
-    pwm.channels[BL1_PWM].duty_cycle = 0x0000
+    pwm.channels[GR1_PWM].duty_cycle = 0x0000 # Stop
+    pwm.channels[BL1_PWM].duty_cycle = 0x0000 # Stop
     
 # Function for stopping
 def stop_motors():
-    pwm.channels[GR1_PWM].duty_cycle = 0x0000 # Stops
-    pwm.channels[BL1_PWM].duty_cycle = 0x0000 # Stops
+    pwm.channels[GR1_PWM].duty_cycle = 0x0000 # Stop
+    pwm.channels[BL1_PWM].duty_cycle = 0x0000 # Stop
+    systemready = True
+    pub.publish(systemready)
+    
+# Function to be run when an unrecognized command is received
+def bad_command():
+    global pub
+    systemready = True
+    pub.publish(systemready)
 
 # Callback function
 def callback(data):
@@ -154,16 +162,30 @@ def callback(data):
         stop_motors()
         print("Stopping Motors...")
     else:
+        bad_command()
         print("Command Not Recognized")
 
 # Listener node function
 def listener():
     # Set up the listener node
-    rospy.init_node('listener', anonymous=True) 
+    #rospy.init_node('listener', anonymous=True) 
     rospy.Subscriber('motorcommands', Commands, callback) # Subscribe to motorcommands topic
     
     # Keep Python from exiting until this node is stopped
     rospy.spin()
 
+#def handshake():
+#    print("Attempting Shake")
+#    rospy.init_node('listener', anonymous=True)
+#    rate = rospy.Rate(10)
+#    while not rospy.is_shutdown():
+#        handshaker = rospy.Publisher("handshake",Bool,queue_size=10)
+#        handshaker.publish(True)
+#        rate.sleep()
+
 if __name__ == '__main__':
+#    handshake()
+    rospy.init_node('listener',anonymous=True)
+    systemready = True
+    pub.publish(systemready)
     listener()
