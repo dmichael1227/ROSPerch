@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
-# Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
-# https://github/ros/ros_tutorials.com
-# And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
-# Software License Agreement (BSD License)
+# Decription:
+# This program makes the ROSPerch move
+# in a prepogrammed path, which in this
+# case is a square.
+# Adapted Sources:
+# Motor command code is adapted from the UTAP 2020
+# code at https://github.com/jdicecco/UTAP/
+# License:
+# Software License Agreement (GPLv3 License)
+# Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
 
+# Imports the necessary libraries and messages
 import rospy
 import time
 import RPi.GPIO as GPIO
@@ -12,6 +19,7 @@ import getopt
 import adafruit_pca9685
 import board
 from std_msgs.msg import Bool
+
 # Set up the PWM Board
 i2c_pwm = board.I2C()
 pwm = adafruit_pca9685.PCA9685(i2c_pwm)
@@ -49,17 +57,18 @@ GPIO.setup(BL2,GPIO.OUT) # Blue 2
 GPIO.setup(OR1,GPIO.OUT) # Orange 1
 GPIO.setup(BR1,GPIO.OUT) # Brown 1
 
-
 # Status LEDs
 GPIO.setup(6,GPIO.OUT)
 GPIO.setup(16,GPIO.OUT)
 running_mission = False
 
+# Drive function
 def drive(GRdir,BLdir,t):
-    start_time = time.time()
-    curr_time = time.time()
+    start_time = time.time() # Initialize start time
+    curr_time = time.time() # Initialize current time
     print(t)
-    while ((curr_time - start_time) < t):
+    while ((curr_time - start_time) < t): # How long to stay in this state/execute command for
+        # Sends commands over GPIO to make motors move
         curr_time = time.time()
         if GRdir == True:
             GPIO.output(GR1,GPIO.LOW)
@@ -69,14 +78,17 @@ def drive(GRdir,BLdir,t):
             GPIO.output(BL1,GPIO.LOW)
         else:
             GPIO.output(BL1,GPIO.HIGH)
-        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF
-        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF
+        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Stops motors at end of command
+        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Stops motors at end of command
 
+# Stop function 
 def stop_motors():
-    pwm.channels[GR1_PWM].duty_cycle = 0x0000
-    pwm.channels[BL1_PWM].duty_cycle = 0x0000
+    pwm.channels[GR1_PWM].duty_cycle = 0x0000 # Stops motors
+    pwm.channels[BL1_PWM].duty_cycle = 0x0000 # Stops motors
 
+# Callback function
 def callback(data):
+    # Prints out logged data and sets variables used in Drive function
     global running_mission
     rospy.loginfo('I heard %s', data.data) # Log what is heard
     print(data.data)
@@ -100,10 +112,10 @@ def callback(data):
         print("Attempting to stop mission...")
         stop_motors()
 
+# Listener node function
 def listener():
-    # Set up the listener node
     rospy.init_node('listener', anonymous=True)
-    rospy.Subscriber('motorstuff', Bool, callback) # Subscribe to ledstuff topic
+    rospy.Subscriber('motorstuff', Bool, callback) # Subscribe to motorstuff topic
 
     # Keep Python from exiting until this node is stopped
     rospy.spin()

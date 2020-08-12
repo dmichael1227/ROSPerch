@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
-# Based on the simple publisher/subscriber tutorial on the ROS tutorial page:
-# https://github/ros/ros_tutorials.com
-# And the UTAP 2020 Code at https://github.com/jdicecco/UTAP/blob/master/UTAP_2020.py
-# Software License Agreement (BSD License)
+# Decription:
+# This program takes user input commands and sends them
+# to a seperate program that deals with making the motors
+# on the ROSPerch either turn on or off.
+# Adapted Sources:
+# Motor command code is adapted from the UTAP 2020
+# code at https://github.com/jdicecco/UTAP/
+# ROS talker/listener node code based on tutorials at:
+# https://github.com/ros/ros_tutorials
+# License:
+# Software License Agreement (GPLv3 License)
+# Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
 
+# Imports the necessary libraries
 import rospy
 import time
 from std_msgs.msg import Bool
 
+# Talker node function
 def talker():
     pub = rospy.Publisher('motorstuff', Bool, queue_size=10) # Publish to motorstuff topic
-    rospy.init_node('talker', anonymous=True) # Initiate the  talker node
+    rospy.init_node('talker', anonymous=True) # Initiate the talker node
     rate = rospy.Rate(10) # Setting the rate to 10hz
     while not rospy.is_shutdown():
 

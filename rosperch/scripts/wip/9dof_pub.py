@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
+# Decription:
+# This program gets and prints out values
+# from the NXP Absolute Orientation Breakout.
+# License:
 # Software License Agreement (GPLv3 License)
+# Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
 
 import time
 import math
@@ -127,4 +132,3 @@ if __name__ == '__main__':
         talker()
     except rospy.ROSInterruptException:
         pass
-
