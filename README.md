@@ -11,7 +11,12 @@ Thank you!
 John & Andrew
 
 # ***Below is said WIP!***
-## Setting up GitHub, Getting the Code, and Testing It
+
+## Table of Contents
+
+
+
+### Setting up GitHub, Getting the Code, and Testing It
 This is how ROS was integrated with the UTAP 2020 daughterboard and a Raspberry Pi 3B running Ubuntu 20.04 with ROS Noetic. Follow the steps under the <strong>Setting Up Your Raspberry Pi and Configuring Pi for Interfacing</strong> in the README.pdf file to get this setup. Also, please note that only the commands that need to be entered into the terminal will be formatted <code>like this</code> for the entirety of this section. 
 <ol>
   <li>Build the daughterboard as described in the UTAP_2020_RPi.pdf document that is available at https://github.com/jdicecco/UTAP. Additionally, build a standard SeaPerch.</li>
@@ -109,7 +114,7 @@ This is how ROS was integrated with the UTAP 2020 daughterboard and a Raspberry 
 		<li><code>rosrun rosperch auto_square.py</code>
 		<ol>
 			<li>Please note that this code currently is fine tuned for our ROSPerch, but can be easily updated to work with any ROSPerch. The code is also easily adaptable to any pattern that is desired, so long as the distances are input, thus making this a great framework for sensor integration later on.</li>
-			<li><em>Additional information on these scripts is available in the <strong>ROSPerch - auto_square.py and launcher_for_auto_square.py</strong> section below.</em></li>
+			<li><em>Additional information on these scripts is available in the <strong><a href="https://github.com/amichael1227/ROSPerch#auto_squarepy-and-launcher_for_auto_squarepy">ROSPerch - auto_square.py and launcher_for_auto_square.py</a></strong> section below.</em></li>
 		</ol>
 	</ol>
 	</li>
@@ -120,7 +125,7 @@ This is how ROS was integrated with the UTAP 2020 daughterboard and a Raspberry 
 		<li><code>rosrun rosperch auto_driver.py</code>
 		<ol>
 			<li>Please note that this code currently is fine tuned for our ROSPerch, but can be easily updated to work with any ROSPerch. The code is also acting as a framework code that is easily adaptable to any sensor integration later on. </li>
-			<li><em>Additional information on these scripts is available in the <strong>ROSPerch - auto_driver.py and mission_commands.py</strong> section below.</em></li>
+			<li><em>Additional information on these scripts is available in the <strong><a href="https://github.com/amichael1227/ROSPerch#auto_driverpy-and-mission_commandspy">ROSPerch - auto_square.py and launcher_for_auto_square.py</a></strong> section below.</em></li>
 		</ol>
 	</ol>
 	</li>	
@@ -132,6 +137,8 @@ The <em>9dof_pub.py</em> script reads from the FXOS8700 3-axis accelerometer/mag
 ## *auto_square.py* and *launcher_for_auto_square.py*
 The <code>auto_square.py</code> script and <code>launcher_for_auto_square.py</code> scripts are intended to be run together in ROS (after launching <code>roscore</code>). The <code>launcher_for_auto_square.py</code> script is fairly simple; it queries the user for a <code>Y</code> or <code>N</code> value in order to launch the <code>auto_square.py</code> script. A value of <code>Y</code> will begin the sequence of function calls in the <code>auto_square.py</code> script, while a value of <code>N</code> shuts off the forward propulsion motors. The <code>auto_square.py</code> script contains a function that takes in a set direction for each of the two forward propulsion motors (True = forwards, False = backwards) and a time duration for which the motors should be running. Currently, upon receiving the start signal from the <code>launcher_for_auto_square.py</code> script, the <code>auto_square.py</code> script begins a deterministic sequence of function calls to attempt to have the ROSPerch follow a predetermined path with no feedback.
 
+## *auto_driver* and *mission_commands.py*
+Words to be added shortly
 
 ## SSH into Pi Over Direct Ethernet Connection
 In order to establish an ssh connection with the Pi in situations where you may be without a wireless network, a connection between the ethernet port of a laptop and the Pi can be used. (Please note that this assumes that you have SSH enabled on your Pi.)
