@@ -90,8 +90,8 @@ def drive(dist):
             systemready = False # Sets system state
             pub.publish(systemready)
     # Drive backward if the input is less than 0   
-   else:
-        t = dist/perch_speed_straight # How long to stay in this state/execute command for
+    else:
+        t = abs(dist)/perch_speed_straight # How long to stay in this state/execute command for
         while (curr_time - start_time) < t:
             curr_time = time.time()
             GPIO.output(GR1,GPIO.HIGH) # Go backward        
