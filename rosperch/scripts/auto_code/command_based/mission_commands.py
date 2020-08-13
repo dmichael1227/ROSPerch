@@ -47,7 +47,7 @@ def callback(data):
                 rate.sleep() # Sleep for 10ms
 
             # What to do if the user sends the Turn Right Command (accounts for space or no space)
-            elif command_input == "RIGHTTURN":
+            elif command_input == "RIGHTTURN" or command_input == "RIGHT TURN":
                 command_input = 'RIGHTTURN' # Accounts for differences in input and what the listener is looking for
                 mission_parameter = float(input("Degrees to Turn: ")) # Asks user for Turn parameters
                 rospy.loginfo([command_input," %s" % mission_parameter]) # Log the entered commands
