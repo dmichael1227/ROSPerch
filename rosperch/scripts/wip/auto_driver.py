@@ -7,7 +7,7 @@
 # Motor command code is adapted from the UTAP 2020
 # code at https://github.com/jdicecco/UTAP/
 # License:
-# Software License Agreement (GPLv3 License)
+# Software License Agreement (BSD License)
 # Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
 
 
@@ -81,8 +81,8 @@ def drive(dist):
     t = dist/perch_speed_straight # How long to stay in this state/execute command for
     while (curr_time - start_time) < t:
         curr_time = time.time()
-        GPIO.output(GR1,GPIO.HIGH) # Go forward        
-        GPIO.output(BL1,GPIO.HIGH) # Go forward
+        GPIO.output(GR1,GPIO.LOW) # Go forward        
+        GPIO.output(BL1,GPIO.LOW) # Go forward
         pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
         pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
         systemready = False # Sets system state

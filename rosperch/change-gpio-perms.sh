@@ -5,7 +5,7 @@
 # access to it and allowing you to run code
 # with GPIO pins without sudo privileges
 # License:
-# Software License Agreement (GPLv3 License)
+# Software License Agreement (BSD License)
 # Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
 
 sudo groupadd gpio
