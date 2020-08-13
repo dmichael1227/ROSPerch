@@ -78,15 +78,28 @@ def drive(dist):
     global pub # Grabs a global variable
     start_time = time.time() # Initialize start time
     curr_time = time.time() # Initialize current time
-    t = dist/perch_speed_straight # How long to stay in this state/execute command for
-    while (curr_time - start_time) < t:
-        curr_time = time.time()
-        GPIO.output(GR1,GPIO.LOW) # Go forward        
-        GPIO.output(BL1,GPIO.LOW) # Go forward
-        pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
-        pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
-        systemready = False # Sets system state
-        pub.publish(systemready)
+    # Drive forward if the input is greater than 0
+    if dist > 0:
+        t = dist/perch_speed_straight # How long to stay in this state/execute command for
+        while (curr_time - start_time) < t:
+            curr_time = time.time()
+            GPIO.output(GR1,GPIO.LOW) # Go forward        
+            GPIO.output(BL1,GPIO.LOW) # Go forward
+            pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
+            pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
+            systemready = False # Sets system state
+            pub.publish(systemready)
+    # Drive backward if the input is less than 0   
+   else:
+        t = dist/perch_speed_straight # How long to stay in this state/execute command for
+        while (curr_time - start_time) < t:
+            curr_time = time.time()
+            GPIO.output(GR1,GPIO.HIGH) # Go backward        
+            GPIO.output(BL1,GPIO.HIGH) # Go backward
+            pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
+            pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
+            systemready = False # Sets system state
+            pub.publish(systemready)
     systemready = True # Sets system state
     pub.publish(systemready) # Publishes system state
     pwm.channels[GR1_PWM].duty_cycle = 0x0000 # Stops motors once command is over
