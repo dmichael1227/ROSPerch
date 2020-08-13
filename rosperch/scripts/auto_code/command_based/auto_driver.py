@@ -115,8 +115,8 @@ def rightturn(angle):
     t = angle/perch_speed_rightturn
     while (curr_time - start_time) < t:
         curr_time = time.time()
-        GPIO.output(GR1,GPIO.LOW) # Reverse        
-        GPIO.output(BL1,GPIO.HIGH) # Go forward 
+        GPIO.output(GR1,GPIO.HIGH) # Reverse        
+        GPIO.output(BL1,GPIO.LOW) # Forward 
         pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
         pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift 
         systemready = False
@@ -134,8 +134,8 @@ def leftturn(angle):
     t = angle/perch_speed_rightturn
     while (curr_time - start_time) < t:
         curr_time = time.time()
-        GPIO.output(GR1,GPIO.HIGH) #go forward        
-        GPIO.output(BL1,GPIO.LOW) #reverse
+        GPIO.output(GR1,GPIO.LOW) # Forward        
+        GPIO.output(BL1,GPIO.HIGH) # Reverse
         pwm.channels[GR1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
         pwm.channels[BL1_PWM].duty_cycle = 0xFFFF # Full speed. Be sure to adjust these for drift
         systemready = False
