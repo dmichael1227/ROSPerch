@@ -97,14 +97,40 @@ This is how ROS was integrated with the UTAP 2020 daughterboard and a Raspberry 
 			<li>If you input a <code>0</code> into the terminal running controller.py, the two side motors on the SeaPerch should stop running, and the two LEDs on the daughterboard should light up. (If the motors were not running in the first place, nothing would happen.)</li>
 			</ol>
 			</li>
-	<li>TBD</li>
+	<li>For controlling the ROSPerch via the handheld controller, run the following command:
+	<ol>
+		<li><code>rosrun rosperch joy_controller.py</code></li>
+	</ol>
+	</li>
+	<li>For the ROSPerch to run a predetermined path, in this case a square, run the following commands in separate terminals:
+	<ol>
+		<li><code>roscore</code></li>
+		<li><code>rosrun rosperch launcher_for_auto_square.py</code></li>
+		<li><code>rosrun rosperch auto_square.py</code>
+		<ol>
+			<li>Please note that this code currently is fine tuned for our ROSPerch, but can be easily updated to work with any ROSPerch. The code is also easily adaptable to any pattern that is desired, so long as the distances are input, thus making this a great framework for sensor integration later on.</li>
+			<li><em>Additional information on these scripts is available in the <strong>ROSPerch - auto_square.py and launcher_for_auto_square.py</strong> section below.</em></li>
+		</ol>
+	</ol>
+	</li>
+	<li>For the ROSPerch to be controlled from the command line, run the following commands, in this order, in separate terminals:
+	<ol>
+		<li><code>roscore</code></li>
+		<li><code>rosrun rosperch mission_commands.py</code></li>
+		<li><code>rosrun rosperch auto_driver.py</code>
+		<ol>
+			<li>Please note that this code currently is fine tuned for our ROSPerch, but can be easily updated to work with any ROSPerch. The code is also acting as a framework code that is easily adaptable to any sensor integration later on. </li>
+			<li><em>Additional information on these scripts is available in the <strong>ROSPerch - auto_driver.py and mission_commands.py</strong> section below.</em></li>
+		</ol>
+	</ol>
+	</li>	
 </ol>
 
 ## 9dof_pub.py
 The <em>9dof_pub.py</em> script reads from the FXOS8700 3-axis accelerometer/magnetometer and the FXAS21002c gyroscope, converts readings into heading, roll, yaw, and yaw tilt, and publishes heading, roll, yaw, yaw tilt, and acceleration in x, y, and z to a single topic. This code is based largely on the UTAP base code: https://github.com/jdicecco/UTAP as well as the ROS tutorials: http://wiki.ros.org/ROS/Tutorials. 
 
-## *auto_test.py* and *mission_launcher.py*
-The <code>auto_test.py</code> script and <code>mission_launcher.py</code> scripts are intended to be run together in ROS (after launching <code>roscore</code>). The <code>mission_launcher.py</code> script is fairly simple; it queries the user for a <code>Y</code> or <code>N</code> value in order to launch the <code>auto_test.py</code> script. A value of <code>Y</code> will begin the sequence of function calls in the <code>auto_test.py</code> script, while a value of <code>N</code> shuts off the forward propulsion motors. The <code>auto_test.py</code> script contains a function that takes in a set direction for each of the two forward propulsion motors (True = forwards, False = backwards) and a time duration for which the motors should be running. Currently, upon receiving the start signal from the <code>mission_launcher.py</code> script, the <code>auto_test.py</code> script begins a deterministic sequence of function calls to attempt to have the ROSPerch follow a predetermined path with no feedback.
+## *auto_square.py* and *launcher_for_auto_square.py*
+The <code>auto_square.py</code> script and <code>launcher_for_auto_square.py</code> scripts are intended to be run together in ROS (after launching <code>roscore</code>). The <code>launcher_for_auto_square.py</code> script is fairly simple; it queries the user for a <code>Y</code> or <code>N</code> value in order to launch the <code>auto_square.py</code> script. A value of <code>Y</code> will begin the sequence of function calls in the <code>auto_square.py</code> script, while a value of <code>N</code> shuts off the forward propulsion motors. The <code>auto_square.py</code> script contains a function that takes in a set direction for each of the two forward propulsion motors (True = forwards, False = backwards) and a time duration for which the motors should be running. Currently, upon receiving the start signal from the <code>launcher_for_auto_square.py</code> script, the <code>auto_square.py</code> script begins a deterministic sequence of function calls to attempt to have the ROSPerch follow a predetermined path with no feedback.
 
 
 ## SSH into Pi Over Direct Ethernet Connection
