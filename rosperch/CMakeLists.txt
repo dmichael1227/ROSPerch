@@ -164,14 +164,16 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
-   scripts/simple_motor_test/controller.py
-   scripts/simple_motor_test/receiver.py
-   scripts/simple_motor_test/motor_code.py
-   scripts/wip/9dof_pub.py
    scripts/joy_controller.py
+   scripts/simple_motor_test/controller.py
+   scripts/simple_motor_test/motor_code.py
+   scripts/simple_motor_test/receiver.py
+   scripts/auto_code/auto_square/auto_square.py
+   scripts/auto_code/auto_square/launcher_for_auto_square.py
+   scripts/auto_code/command_based/auto_driver.py
+   scripts/auto_code/command_based/mission_commands.py
+   scripts/wip/9dof_pub.py
    scripts/wip/auto_test.py
-   scripts/auto_code/auto_square.py
-   scripts/auto_code/launcher_for_auto_square.py
    scripts/wip/mission_launcher.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
