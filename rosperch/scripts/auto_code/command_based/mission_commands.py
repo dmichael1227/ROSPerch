@@ -34,6 +34,7 @@ def callback(data):
             print()
             print("Mission Commands:")
             print("Drive, RightTurn, LeftTurn, Stop")
+            print()
             command_input = input("Please Input a Command: ") # Ask user for mission command
             command_input = str(command_input.upper())
             print()
@@ -57,7 +58,7 @@ def callback(data):
             # What to do if the user sends the Turn Left Command (accounts for space or no space)
             # For line by line comments describing functionality, see the DRIVE and RIGHTTURN
             # if/elif statements.
-            elif command_input == "LEFTTURN":
+            elif command_input == "LEFTTURN" or command_input == "LEFT TURN":
                 command_input = 'LEFTTURN'
                 mission_parameter = float(input("Degrees to Turn: "))
                 rospy.loginfo([command_input," %s" % mission_parameter])
