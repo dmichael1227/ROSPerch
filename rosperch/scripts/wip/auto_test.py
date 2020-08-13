@@ -7,7 +7,7 @@
 # Motor command code is adapted from the UTAP 2020
 # code at https://github.com/jdicecco/UTAP/
 # License:
-# Software License Agreement (GPLv3 License)
+# Software License Agreement (BSD License)
 # Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
 
 # Imports the necessary libraries and messages
