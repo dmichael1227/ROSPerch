@@ -2,15 +2,13 @@
 Greetings human!
 Please refer to the README.pdf document found [here](https://github.com/amichael1227/ROSPerch/blob/master/README.pdf) for any specific questions that may not be answered in this README.md document. If you need help, feel free to [create an issue]() and we'll be happy to help!
 
-
-**NOTE:** *This ROS Package is currently a work in progress and updates will be coming out as available.* 
-
-
 Thank you!
 
 John & Andrew
 
-# ***Below is said WIP!***
+
+**NOTE:** *This ROS Package is currently a work in progress and updates will be coming out as available.* 
+
 
 ## Table of Contents
 <ol>
@@ -360,7 +358,7 @@ https://ieeexplore.ieee.org/document/8729755
 
 https://www.naval-technology.com/projects/remus-100-automatic-underwater-vehicle/
 
-*Article covering the sensors/navigation tools used by the REMUS AUV*
+*Article covering the sensors/navigation tools used by the REMUS AUV.*
 
 ### Additional GPS Sensor References
 
