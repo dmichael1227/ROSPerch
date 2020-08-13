@@ -20,6 +20,7 @@ John & Andrew
 	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#9dof_pubpy">9dof_pub.py</a></li>
 	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#ssh-into-pi-over-direct-ethernet-connection">SSH into Pi Over Direct Ethernet Connection</a></li>
 	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.pdf">README.pdf w/ Additional Information</a></li>
+	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#additional-references">Additional References</a></li>
 </ol>
 
 
@@ -159,3 +160,210 @@ In order to establish an ssh connection with the Pi in situations where you may 
 	</li>
 	<li>Enter your password, press <code>enter</code>, and you're in!</li>
 </ol>
+
+## Additional References
+A majority of our references are included within the README.pdf steps that they were used to create, but here are websites and documents that were used as additional references about ROS, Ubuntu, GitHub, and other project related topics. 
+
+### General ROS References
+
+https://gist.github.com/drmaj/20b365ddd3c4d69e37c79b01ca17587a
+
+*Covers building ROS Melodic with Python 3 rather than Python 2.7, was used during testing different ROS distros.*
+
+https://rsl.ethz.ch/education-students/lectures/ros.html#course_material
+
+*Course materials for a C++ centric ROS course from ETH Zurich, first lecture and exercise are very useful for general ROS intro, other lectures focus more on ROS with C++.*
+
+https://surfertas.github.io/ros/2017/03/06/ros-husky-robocup.html
+
+*Goes over building a .launch file for Exercise Session 1 of the above course website and provides an example solution.*
+
+https://answers.ros.org/question/253445/arduino-cmd_vel-and-odom-with-pololu-motors-w-encoder/
+
+*Example of using ROS with the motor drivers that are used on the UTAP daughterboard, only this example is run on and Arduino with C++ rather than a Raspberry Pi with Python, but still helpful for example integration.*
+
+http://wiki.ros.org/ROS/NetworkSetup
+
+*Goes over different parts of configuring ROS to connect to a network, thus allowing you to communicate with ROS across multiple machines.*
+
+http://wiki.ros.org/ROS/Tutorials/MultipleRemoteMachines
+
+*Information about connecting to machines/robots that are not on the same network, was not very practical to test in the current situation.*
+
+http://wiki.ros.org/Packages
+
+*Outlines what the common files and directories are in a ROS package and defines what they are.* 
+
+https://answers.ros.org/question/217107/does-a-roslaunch-start-roscore-when-needed/
+
+*Clarifies that using roslaunch will autostart roscore if it is needed but not already running.*
+
+### ROS - Launch File
+
+https://answers.ros.org/question/12216/launch-file-how-to-write-it/
+
+*This has an example of how a .launch file would be written.*
+
+http://www.clearpathrobotics.com/assets/guides/kinetic/ros/Launch%20Files.html
+
+*Provides a more detailed picture of what the .launch file should look like. The file starts with <launch> and ends with </launch>. Within those tags, there is a node tag that does essentially the same thing as launching the program with rosrun, including auto launching roscore if it is needed. The pkg in the tag is the ROS package name, the type is the name of the executable file, in our case Python script, that is being launched, and the name part of the tag should be the same as the type part, but can be used to overwrite the name of the node if necessary. Basically, for every Python script you need to call, you need a node tag, since the scripts are technically ROS nodes. Be sure to order the node tags in the order they need to be launched!*
+
+http://wiki.ros.org/roslaunch/XML
+
+*Official documentation on the .launch file’s XML content.*
+
+### ROS - Robot Navigation
+
+https://circuitpython.readthedocs.io/projects/fxas21002c/en/latest/api.html
+
+https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056
+
+*Documentation and datasheet for the NXP FXAS21002C gyroscope, part of the NXP Precision 9DoF Breakout.*
+
+https://circuitpython.readthedocs.io/projects/fxos8700/en/latest/api.html
+
+https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614
+
+*Documentation and datasheet for the NXP FXOS8700 accelerometer and magnetometer, part of the NXP Precision 9DoF Breakout.*
+
+https://learn.adafruit.com/nxp-precision-9dof-breakout/
+
+*Documentation for the NXP Precision 9DoF Breakout.*
+
+https://learn.turtlebot.com/2015/02/01/14/
+
+*Information about using ROS to move a robot to a specific point on a map, seems to need to have some sort of vision sensor on it to work. This tutorial is also specific to the TurtleBot.*
+
+https://www.southampton.ac.uk/~fangohr/teaching/python/book/html/16-scipy.html
+
+*The SciPy library offers a range of numerical methods for Python. When paired with numpy, it can do math with vectors and matrices, and paired with matplotlib it enables you to  plot and visualize the data. This is potentially useful for more “complex” math problems involving integration.*
+
+https://answers.ros.org/question/335062/how-to-create-a-simple-map-for-simulation-in-stdr-simulator/?answer=335079#post-id-335079
+
+http://wiki.ros.org/map_server
+
+*The answer to this forum post (first link) shows how to create a map file that ROS can read. Essentially, you create a simple map in a drawing software like MS Paint or GIMP, save it as a .png, and then create a text file that provides the information ROS needs to know about (examples include image name and the resolution (in meters per pixel)), and save it in the same directory as the image file, with the same name as the image file, but with the .yaml extension. Additional information can be found in the map_server Package Summary (second link) under the Map format header.*
+
+https://www.cs.bham.ac.uk/internal/courses/int-robot/2017/notes/amcl.php
+
+*More information about using ROS to move a robot to a specific point on a map, still needs some sort of vision sensor or environment scanner. If you use the information in the link above to create a map, this tutorial shows how to visualize it using rviz (skip the step about running roscore and the Pioneer driver).*
+
+https://answers.ros.org/question/227390/how-to-bring-map-in-rviz-indigo-gazebo/
+
+*Another way to view a map file in rviz.*
+
+https://answers.ros.org/question/233257/rospack-error-package-map_server-not-found/
+
+*The map_server package might not be installed with the specific version of ROS that you download, so this is the command to download it. Just be sure to change “indigo” to whatever distribution of ROS you are using.*
+
+### Python References
+
+https://pythonprogramminglanguage.com/user-input-python/
+
+*Reviews commands to get raw inputs from users in Python 3 and gives example uses.*
+
+https://stackoverflow.com/questions/22990069/text-game-convert-input-text-to-lowercase-python-3-0
+
+*Covers how to change a user's raw input into all lower-case to eliminate code errors stemming from differences in capitalization. Simply change .lower() to .upper() for upper-case.*
+
+### General Linux References
+
+https://learning.oreilly.com/library/view/robot-operating-system/9781484234051/
+
+*This book provides a brief introduction to Linux operating systems, with most of the focus on Ubuntu, as well as some basic commands. It also covers the absolute basics of ROS with both C++ and Python. *
+
+### Ubuntu References
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-18-04
+
+*Installing VNC on a Ubuntu system so it can be used when you do not have access to a monitor, mouse, and keyboard for the Raspberry Pi.*
+
+https://linuxize.com/post/how-to-enable-ssh-on-ubuntu-18-04/
+
+*Enabling SSH on a Ubuntu system so it can be used when you do not have access to a monitor, mouse, and keyboard for the Raspberry Pi.*
+
+https://www.howtogeek.com/341944/how-to-clone-your-raspberry-pi-sd-card-for-foolproof-backup/
+
+*Making a copy of the image of Ubuntu that runs on the Raspberry Pi to allow for backups and cloning the SD card.*
+
+https://www.raspberrypi.org/forums/viewtopic.php?t=36856
+
+https://unix.stackexchange.com/questions/118716/unable-to-write-to-a-gpio-pin-despite-file-permissions-on-sys-class-gpio-gpio18
+
+https://stackoverflow.com/questions/30938991/access-gpio-sys-class-gpio-as-non-root
+
+*These three links cover the GPIO issue that we were having, and show other people having the same issues, and how they worked around the issue.*
+
+https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/
+
+*Changing the hostname of a Ubuntu system, useful for the above configuration.*
+
+### Raspbian References
+
+https://www.ionos.com/digitalguide/server/configuration/provide-raspberry-pi-with-a-static-ip-address/
+
+*Setting a static IP address for Raspberry Pi running Raspbian.*
+
+https://www.instructables.com/id/ROS-Melodic-on-Raspberry-Pi-4-RPLIDAR/
+
+*Has an image file of Rasbian Buster (and Raspbian Buster Lite) with ROS Melodic installed. Using this image file helps speed up the installation of ROS on the Pi.*
+
+
+### Virtual Machine References
+
+https://www.liberiangeek.net/2013/09/copy-paste-virtualbox-host-guest-machines/
+
+*Setting up VirtualBox to allow for copy and paste between host and guest machines.*
+
+### GitHub References
+
+http://sethrobertson.github.io/GitBestPractices/
+
+*Some GitHub best practices.*
+
+https://uoftcoders.github.io/studyGroup/lessons/git/branches/lesson/
+
+*Using GitHub on Linux within a terminal.
+
+https://docs.github.com/en/github/using-git/ignoring-files
+
+*Goes over what .gitignore files are and how to use them.*
+
+
+https://stackoverflow.com/questions/115983/how-can-i-add-an-empty-directory-to-a-git-repository/180917#180917
+
+*Setting up a .gitignore file to add an “empty” directory to a GitHub Repository.*
+
+https://stackoverflow.com/questions/18216991/create-a-tag-in-a-github-repository
+
+*Adding tags to GitHub repositories and specific commits.*
+
+https://www.markdownguide.org/basic-syntax/
+
+https://www.markdownguide.org/extended-syntax/
+
+*Syntax for markdown files, used as formatting guides to make README.md on ROSPerch GitHub Repository. *
+
+https://docs.github.com/en/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue
+
+*Has information on linking pull requests and issues, both manually and automatically with keywords.*
+
+### Underwater Vehicle References
+
+https://ieeexplore.ieee.org/document/6107001
+
+*IEEE paper on implementing ROS on the Yellowfin AUV.*
+
+https://ieeexplore.ieee.org/document/8729755
+	
+*IEEE presentation report on using ROS on a REMUS 100 AUV, references the Python based libraries and packages that they built to interface with the AUV, however these packages and libraries do not seem to be publicly available.*
+
+https://www.naval-technology.com/projects/remus-100-automatic-underwater-vehicle/
+
+*Article covering the sensors/navigation tools used by the REMUS AUV*
+
+### Additional GPS Sensor References
+
+https://askubuntu.com/questions/891662/why-does-cgps-s-give-me-no-results
+
+*Tip that helped setting up gpsd when using a USB adapter.*
