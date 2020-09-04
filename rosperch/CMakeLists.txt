@@ -173,8 +173,8 @@ include_directories(
    scripts/auto_code/command_based/auto_driver.py
    scripts/auto_code/command_based/mission_commands.py
    scripts/wip/9dof_pub.py
-   scripts/wip/auto_test2.py
-   scripts/wip/mission_launcher2.py
+   #scripts/wip/auto_test2.py
+   #scripts/wip/mission_launcher2.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
