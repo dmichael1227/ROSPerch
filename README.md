@@ -1,6 +1,6 @@
 # ROSPerch
 Greetings human!
-Please refer to the README.pdf document found [here](https://github.com/amichael1227/ROSPerch/blob/master/README.pdf) for any specific questions that may not be answered in this README.md document. If you need help, feel free to [create an issue]() and we'll be happy to help!
+Please refer to the README.pdf document found [here](https://github.com/amichael1227/ROSPerch/blob/master/README.pdf) for any specific questions that may not be answered in this README.md document. If you need help, feel free to [create an issue](https://github.com/amichael1227/ROSPerch/issues) and we'll be happy to help!
 
 Thank you!
 
