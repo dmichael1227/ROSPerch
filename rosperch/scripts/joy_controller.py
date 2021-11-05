@@ -11,7 +11,7 @@
 # https://www.kernel.org/doc/Documentation/input/joystick-api.txt
 # License:
 # Software License Agreement (BSD License)
-# Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
+# Find the full agreement at https://github.com/dmichael1227/ROSPerch/blob/master/LICENSE
 
 # Imports the necessary libraries
 import time

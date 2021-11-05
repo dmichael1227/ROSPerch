@@ -1,10 +1,10 @@
 # ROSPerch
 Greetings human!
-Please refer to the README.pdf document found [here](https://github.com/amichael1227/ROSPerch/blob/master/README.pdf) for any specific questions that may not be answered in this README.md document. If you need help, feel free to [create an issue](https://github.com/amichael1227/ROSPerch/issues) and we'll be happy to help!
+Please refer to the README.pdf document found [here](https://github.com/dmichael1227/ROSPerch/blob/master/README.pdf) for any specific questions that may not be answered in this README.md document. If you need help, feel free to [create an issue](https://github.com/dmichael1227/ROSPerch/issues) and we'll be happy to help!
 
 Thank you!
 
-John & Andrew
+John & Drew
 
 
 **NOTE:** *This ROS Package is currently a work in progress and updates will be coming out as available.* 
@@ -12,13 +12,13 @@ John & Andrew
 
 ## Table of Contents
 <ol>
-	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#setting-up-github-getting-the-code-and-testing-it">Setting up GitHub, Getting the Code, and Testing It</a></li>
-	<li><a href="https://github.com/amichael1227/ROSPerch#auto_squarepy-and-launcher_for_auto_squarepy">auto_square.py and launcher_for_auto_square.py</a></li>
-	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#auto_driver-and-mission_commandspy">auto_driver and mission_commands.py</a></li>
-	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#9dof_pubpy">9dof_pub.py</a></li>
-	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#ssh-into-pi-over-direct-ethernet-connection">SSH into Pi Over Direct Ethernet Connection</a></li>
-	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.pdf">README.pdf w/ Additional Information</a></li>
-	<li><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#additional-references">Additional References</a></li>
+	<li><a href="https://github.com/dmichael1227/ROSPerch/blob/master/README.md#setting-up-github-getting-the-code-and-testing-it">Setting up GitHub, Getting the Code, and Testing It</a></li>
+	<li><a href="https://github.com/dmichael1227/ROSPerch#auto_squarepy-and-launcher_for_auto_squarepy">auto_square.py and launcher_for_auto_square.py</a></li>
+	<li><a href="https://github.com/dmichael1227/ROSPerch/blob/master/README.md#auto_driver-and-mission_commandspy">auto_driver and mission_commands.py</a></li>
+	<li><a href="https://github.com/dmichael1227/ROSPerch/blob/master/README.md#9dof_pubpy">9dof_pub.py</a></li>
+	<li><a href="https://github.com/dmichael1227/ROSPerch/blob/master/README.md#ssh-into-pi-over-direct-ethernet-connection">SSH into Pi Over Direct Ethernet Connection</a></li>
+	<li><a href="https://github.com/dmichael1227/ROSPerch/blob/master/README.pdf">README.pdf w/ Additional Information</a></li>
+	<li><a href="https://github.com/dmichael1227/ROSPerch/blob/master/README.md#additional-references">Additional References</a></li>
 </ol>
 
 
@@ -70,10 +70,10 @@ This is how ROS was integrated with the UTAP 2020 daughterboard and a Raspberry 
 	<li>Clone the GitHub Repository and link it to your catkin workspace.
 		<ol>
 			<li><code>cd ~/git</code></li>
-			<li><code>git clone git@github.com:amichael1227/ROSPerch.git</code>
+			<li><code>git clone git@github.com:dmichael1227/ROSPerch.git</code>
 			<ol>
 				<li>Alternatively, if you do not set up the SSH Keys:</li>
-				<li><code>git clone https://github.com/amichael1227/ROSPerch.git</code></li>
+				<li><code>git clone https://github.com/dmichael1227/ROSPerch.git</code></li>
 			</ol>
 			</li>
 			<li><code>cd ROSPerch/</code></li>
@@ -120,7 +120,7 @@ This is how ROS was integrated with the UTAP 2020 daughterboard and a Raspberry 
 		<li><code>rosrun rosperch auto_square.py</code>
 		<ol>
 			<li>Please note that this code currently is fine tuned for our ROSPerch, but can be easily updated to work with any ROSPerch. The code is also easily adaptable to any pattern that is desired, so long as the distances are input, thus making this a great framework for sensor integration later on.</li>
-			<li><em>Additional information on these scripts is available in the <strong><a href="https://github.com/amichael1227/ROSPerch#auto_squarepy-and-launcher_for_auto_squarepy">ROSPerch - auto_square.py and launcher_for_auto_square.py</a></strong> section below.</em></li>
+			<li><em>Additional information on these scripts is available in the <strong><a href="https://github.com/dmichael1227/ROSPerch#auto_squarepy-and-launcher_for_auto_squarepy">ROSPerch - auto_square.py and launcher_for_auto_square.py</a></strong> section below.</em></li>
 		</ol>
 	</ol>
 	</li>
@@ -131,7 +131,7 @@ This is how ROS was integrated with the UTAP 2020 daughterboard and a Raspberry 
 		<li><code>rosrun rosperch auto_driver.py</code>
 		<ol>
 			<li>Please note that this code currently is fine tuned for our ROSPerch, but can be easily updated to work with any ROSPerch. The code is also acting as a framework code that is easily adaptable to any sensor integration later on. </li>
-			<li><em>Additional information on these scripts is available in the <strong><a href="https://github.com/amichael1227/ROSPerch/blob/master/README.md#auto_driver-and-mission_commandspy">ROSPerch - auto_square.py and launcher_for_auto_square.py</a></strong> section below.</em></li>
+			<li><em>Additional information on these scripts is available in the <strong><a href="https://github.com/dmichael1227/ROSPerch/blob/master/README.md#auto_driver-and-mission_commandspy">ROSPerch - auto_square.py and launcher_for_auto_square.py</a></strong> section below.</em></li>
 		</ol>
 	</ol>
 	</li>	

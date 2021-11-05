@@ -10,7 +10,7 @@
 # https://github.com/ros/ros_tutorials
 # License:
 # Software License Agreement (BSD License)
-# Find the full agreement at https://github.com/amichael1227/ROSPerch/blob/master/LICENSE
+# Find the full agreement at https://github.com/dmichael1227/ROSPerch/blob/master/LICENSE
 
 # Imports the necessary libraries
 import rospy

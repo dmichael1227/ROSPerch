@@ -5,9 +5,9 @@
   <description>rosperch package for integrating ROS with a UTAP SeaPerch</description>
 
   <!-- Important Info Tags -->
-  <author>Andrew Sullivan</author>
+  <author>Drew Mulcare</author>
   <author>John McLinden</author>
-  <maintainer email="amsullivan2@wpi.edu">Andrew Sullivan</maintainer>
+  <maintainer email="drewmichael1227@gmail.com">Drew Mulcare</maintainer>
   <maintainer email="john_mclinden@my.uri.edu">John McLinden</maintainer>
   <license>BSD</license>
 
