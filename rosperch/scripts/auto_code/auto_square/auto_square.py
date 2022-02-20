@@ -8,7 +8,7 @@
 # code at https://github.com/jdicecco/UTAP/
 # License:
 # Software License Agreement (BSD License)
-# Find the full agreement at https://github.com/dmichael1227/ROSPerch/blob/master/LICENSE
+# Find the full agreement at https://github.com/mxdrew/ROSPerch/blob/master/LICENSE
 
 # Imports the necessary libraries and messages
 import rospy

@@ -6,7 +6,7 @@
 # with GPIO pins without sudo privileges
 # License:
 # Software License Agreement (BSD License)
-# Find the full agreement at https://github.com/dmichael1227/ROSPerch/blob/master/LICENSE
+# Find the full agreement at https://github.com/mxdrew/ROSPerch/blob/master/LICENSE
 
 sudo groupadd gpio
 sudo chown ubuntu:gpio /dev/mem
